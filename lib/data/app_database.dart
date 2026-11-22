@@ -37,6 +37,34 @@ class AppDatabase extends _$AppDatabase {
     return select(tareas).watch();
   }
 
+  // NOTA: Es lo mismo que "UPDATE tareas SET completada = 1 WHERE id = x"
+  Future<int> actualizarEstado(int id, bool completada) {
+    return (update(tareas)..where((t) => t.id.equals(id))).write(
+      TareasCompanion(
+        completada: Value(completada),
+      ),
+    );
+  }
+
+  Future<int> editarTitulo(int id, String titulo) {
+    final tituloLimpio = titulo.trim();
+
+    if (tituloLimpio.isEmpty) {
+      throw ArgumentError('El título no puede estar vacío');
+    }
+
+    return (update(tareas)..where((t) => t.id.equals(id))).write(
+      TareasCompanion(
+        titulo: Value(tituloLimpio),
+      ),
+    );
+  }
+
+  // NOTA: Es lo mismo que "DELETE FROM tareas WHERE id = x;"
+  Future<int> eliminarTarea(int id) {
+    return (delete(tareas)..where((t) => t.id.equals(id))).go();
+  }
+
   @override
   int get schemaVersion => 1;
 }

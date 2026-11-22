@@ -20,4 +20,22 @@ void main() {
     expect(tareas.first.titulo, 'Estudiar Flutter');
     expect(tareas.first.completada, false);
   });
+
+  test('No permite guardar tareas vacías', () async {
+    final db = AppDatabase.forTesting(
+      NativeDatabase.memory(),
+    );
+
+    addTearDown(() => db.close());
+
+    await expectLater(
+      db.agregarTarea('   '),
+      throwsArgumentError,
+    );
+
+    final tareas = await db.select(db.tareas).get();
+
+    expect(tareas, isEmpty);
+  });
 }
+
