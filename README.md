@@ -1,17 +1,49 @@
-# gestor_tareas_local
+# Gestor de tareas local con SQLite
 
-A new Flutter project.
+## Descripción del proyecto
+El presente proyecto consiste en un gestor de tareas con persistencia
+local de datos mediante el gestor SQLite.
 
-## Getting Started
+El gestor permitirá agregar, consultar, editar, marcar como completadas y
+eliminar tareas, conservando la información después de cerrar y volver a abrir la aplicación.
 
-This project is a starting point for a Flutter application.
+Está diseñado para ejecutarse tanto en Android, iOS, Windows, Linux,
+macOS y web, esto sin depender de un servidor externo ni de una conexión
+a internet para almacenar los datos.
 
-A few resources to get you started if this is your first Flutter project:
+## Tecnología de persistencia
+Para implementar la persistencia local se eligió SQLite como motor de bases
+de datos para almacenar la información de manera local sin necesidad de un
+servidor independiente; Drift como biblioteca de persistencia para Dart con
+el fin de poder definir tablas, realizar operaciones CRUD y realizar consultas
+reactivas; y, drift_flutter como paquete para facilitar la integración de Drift con Flutter en plataformas nativas y web.
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+Se eligió esta combinación de tecnologías por su compatibilidad multiplataforma,
+soporte para operaciones asíncronas y posibilidad de mantener una misma capa de
+persistencia entre diferentes OS.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Diseño de la base de datos
+Para almacenar la información se diseñó una tabla llamada `tareas`, que contará con los siguientes campos:
+
+| Campo | Tipo de dato | Descripción |
+|---|---|---|
+| id | INTEGER PRIMARY KEY | Identificador único de cada tarea |
+| titulo | TEXT NOT NULL | Nombre de la tarea |
+| completada | INTEGER NOT NULL DEFAULT 0 | Estado: 0 = pendiente, 1 = completada |
+
+El campo "id" es la clave primaria y permite identificar a cada tarea de manera única.
+
+## Ejecución del proyecto
+Para ejecutar el proyecto es necesario tener Flutter previamente instalado.
+
+1. Obtener las dependencias:
+   `flutter pub get`
+
+2. Comprobar que el código no tenga problemas:
+   `flutter analyze`
+
+3. Ejecutar las pruebas:
+   `flutter test`
+
+4. Abrir la aplicación en Chrome en un puerto específico:
+   `flutter run -d chrome --web-port 8080`
