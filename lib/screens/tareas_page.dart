@@ -58,33 +58,34 @@ class _TareasPageState extends State<TareasPage> {
   }
 
   Future<void> _editarTarea(Tarea tarea) async {
-    final controller = TextEditingController(text: tarea.titulo);
+    String tituloEditado = tarea.titulo;
 
     final nuevoTitulo = await showDialog<String>(
       context: context,
-      builder: (context) => AlertDialog(
+      builder: (dialogContext) => AlertDialog(
         title: const Text('Editar tarea'),
-        content: TextField(
-          controller: controller,
+        content: TextFormField(
+          initialValue: tarea.titulo,
           autofocus: true,
           decoration: const InputDecoration(
             labelText: 'Título',
           ),
+          onChanged: (valor) {
+            tituloEditado = valor;
+          },
         ),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => Navigator.pop(dialogContext),
             child: const Text('Cancelar'),
           ),
           FilledButton(
-            onPressed: () => Navigator.pop(context, controller.text),
+            onPressed: () => Navigator.pop(dialogContext, tituloEditado),
             child: const Text('Guardar'),
           ),
         ],
       ),
     );
-
-    controller.dispose();
 
     if (!mounted || nuevoTitulo == null) return;
 
