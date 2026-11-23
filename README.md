@@ -39,7 +39,7 @@ La aplicación fue desarrollada con Flutter, SQLite, Drift y drift_flutter, util
 Para su ejecución en navegadores, se incorporaron los archivos sqlite3.wasm y drift_worker.dart.js en la carpeta web/, junto con la configuración correspondiente de Drift.
 
 ## Plataformas verificadas
-Se comprobó la persistencia y usabilidad de la aplicación en macOS, Google Chrome, Android 12 (Moto G51 5G) y en iOS 18 (iPhone 16).
+Se comprobó la persistencia y usabilidad de la aplicación en macOS, Google Chrome, Android 12 (Moto G51 5G) y en iOS 27 (iPhone 16).
 
 Windows y Linux se consideran plataformas previstas por la arquitectura multiplataforma, pero no se realizaron pruebas de ejecución en ellas.
 
